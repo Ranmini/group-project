@@ -9,6 +9,8 @@
   <div class="card">
     <div class="card-body register-card-body">
     <div class="login-logo">
+      <link rel="stylesheet" href="css/styles.css">
+      <div id="overlay"></div> 
       <a href="/"><b><img src="/dist/img/logo.jpg" alt="logo" style="width: 50%; opacity: .4"></a>
     </div>
       <p class="login-box-msg" style="color:DodgerBlue;font-size:110%;"><b>Sign Up and Start Learning!</b></p>
@@ -66,9 +68,16 @@
           </div>
      <!----error checking ---->
 
-       
-
-     
+        @if ($errors->any())
+        <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+         </div>
+        @endif
+        
         @if(session()->has('message'))
         <div class ="alert alert-success">
           {{session() -> get('message')}}
@@ -76,7 +85,7 @@
 
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat" name="register">Register</button>
           </div>
          
           {{csrf_field() }}

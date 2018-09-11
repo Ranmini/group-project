@@ -15,7 +15,13 @@ class UserController extends Controller
 {
     public function RegisterUser(Request $request){
 
-    	
+
+    //input validation
+
+    $validatedData = $request->validate([
+    'name' => 'required|min:3|max:50',
+    'pwd' => 'required|confirmed|min:6',
+]);
 
 
     	$table =new User();
@@ -30,7 +36,7 @@ class UserController extends Controller
 
     	//$table->save();
     	return redirect()-> back()->with('message','Successfully registered');
-       //return redirect()->route('', ['id' => 1]);
+        
 
     }
 
@@ -44,6 +50,7 @@ class UserController extends Controller
 
         if(count($checkLogin)>0){
             echo "login success";
+           
         }
         else
         {
